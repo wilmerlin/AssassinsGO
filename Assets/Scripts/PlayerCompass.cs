@@ -35,8 +35,7 @@ public class PlayerCompass : MonoBehaviour
     void Awake()
     {
 		// cache a reference to the Board class
-		m_board = Object.FindObjectOfType<Board>().GetComponent<Board>();
-
+		m_board = GameObject.FindObjectOfType<Board>().GetComponent<Board>();
 
 		// create the arrow heads
 		SetupArrows();

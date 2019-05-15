@@ -11,7 +11,7 @@ public class PlayerManager : TurnManager
 	// reference to PlayerMover and PlayerInput components
 	public PlayerMover playerMover;
     public PlayerInput playerInput;
-    public PlayerCompass playerCompass;
+
     // reference to Board component
     Board m_board;
 
@@ -25,27 +25,11 @@ public class PlayerManager : TurnManager
 		// cache references to PlayerMover and PlayerInput
 		playerMover = GetComponent<PlayerMover>();
         playerInput = GetComponent<PlayerInput>();
-        playerCompass = GetComponentInChildren<PlayerCompass>();
 
         m_board = Object.FindObjectOfType<Board>().GetComponent<Board>();
 
 		// make sure that input is enabled when we begin
 		playerInput.InputEnabled = true;
-
-        if (playerMover.faceDestination)
-        {
-            playerCompass.transform.parent = null;
-        }
-    }
-
-
-    private void UpdatePlayerCompass()
-    {
-        if (playerMover.faceDestination)
-        {
-            playerCompass.transform.position = transform.position;
-        }
-
     }
 
     void Update()
@@ -57,7 +41,7 @@ public class PlayerManager : TurnManager
         }
 
 		// get keyboard input
-		playerInput.GetInput();
+		playerInput.GetKeyInput();
 
 		// connect user input with PlayerMover's Move methods
 		if (playerInput.V == 0)
@@ -65,12 +49,10 @@ public class PlayerManager : TurnManager
             if (playerInput.H < 0)
             {
                 playerMover.MoveLeft();
-                playerInput.ClearInput();
             }
             else if (playerInput.H > 0)
             {
                 playerMover.MoveRight();
-                playerInput.ClearInput();
             }
         }
         else if (playerInput.H == 0)
@@ -78,12 +60,10 @@ public class PlayerManager : TurnManager
             if (playerInput.V < 0)
             {
                 playerMover.MoveBackward();
-                playerInput.ClearInput();
             }
             else if (playerInput.V > 0)
             {
                 playerMover.MoveForward();
-                playerInput.ClearInput();
             }
         }
     }

@@ -18,11 +18,6 @@ public class PlayerMover : Mover
     {
         base.Start();
 		UpdateBoard();
-
-        if (faceDestination && m_playerCompass != null)
-        {
-            m_playerCompass.transform.parent = null;
-        }
     }
 
     // update the Board's PlayerNode
@@ -51,12 +46,6 @@ public class PlayerMover : Mover
         // enable PlayerCompass arrows
 		if (m_playerCompass != null)
 		{
-
-            if (faceDestination)
-            {
-                m_playerCompass.transform.position = transform.position;
-            }
-
 			m_playerCompass.ShowArrows(true);
 		}
 
